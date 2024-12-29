@@ -1,0 +1,184 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "gpuType": "T4",
+      "authorship_tag": "ABX9TyMluT0zzBKRoToHLUXJ9OAR",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "accelerator": "GPU"
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Ravi20034/Ravi20034/blob/main/Sentiment%20Analysis\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install nltk"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Abpz9J2C5thB",
+        "outputId": "7bf33a55-69ed-47b4-fb45-43f91f461968"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: nltk in /usr/local/lib/python3.10/dist-packages (3.9.1)\n",
+            "Requirement already satisfied: click in /usr/local/lib/python3.10/dist-packages (from nltk) (8.1.7)\n",
+            "Requirement already satisfied: joblib in /usr/local/lib/python3.10/dist-packages (from nltk) (1.4.2)\n",
+            "Requirement already satisfied: regex>=2021.8.3 in /usr/local/lib/python3.10/dist-packages (from nltk) (2024.11.6)\n",
+            "Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from nltk) (4.67.1)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from nltk.sentiment.vader import SentimentIntensityAnalyzer\n",
+        "import nltk\n",
+        "nltk.download('vader_lexicon')\n",
+        "sid = SentimentIntensityAnalyzer()\n",
+        "def sentiment_scores(sentence):\n",
+        "    score = sid.polarity_scores(sentence)\n",
+        "    print(score)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "JZXHzFHd5xV8",
+        "outputId": "3b0ffebc-644f-4d76-9a49-168cef24445a"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package vader_lexicon to /root/nltk_data...\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(sentiment_scores(\"Ravi is a boy\"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ZVrRHc8f6BSQ",
+        "outputId": "21699b62-0258-457c-d631-f72a52998638"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}\n",
+            "None\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(sentiment_scores(\"Ravi is a good boy\"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Sokg_s4c6d1i",
+        "outputId": "3448f4f3-1bec-4744-d483-689103406330"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'neg': 0.0, 'neu': 0.508, 'pos': 0.492, 'compound': 0.4404}\n",
+            "None\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(sentiment_scores(\"Ravi is a bad boy\"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8tLfGjY46g_F",
+        "outputId": "b9249dee-97a1-4319-d408-0af8c877d5cd"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'neg': 0.538, 'neu': 0.462, 'pos': 0.0, 'compound': -0.5423}\n",
+            "None\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(sentiment_scores(\"Ravi is a very bad boy\"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BaqtTXpD6jdi",
+        "outputId": "dad8b550-3941-442b-d8cd-573e7cdae46a"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'neg': 0.487, 'neu': 0.513, 'pos': 0.0, 'compound': -0.5849}\n",
+            "None\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
